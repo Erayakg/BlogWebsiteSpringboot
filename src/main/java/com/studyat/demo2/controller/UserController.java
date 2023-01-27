@@ -5,8 +5,6 @@ import com.studyat.demo2.service.IuserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -27,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public Optional<User> getByIdUser(@PathVariable(name = "userId") Long id) {
+    public User getByIdUser(@PathVariable(name = "userId") Long id) {
 
          return iuserService.getByIdUser(id);
     }

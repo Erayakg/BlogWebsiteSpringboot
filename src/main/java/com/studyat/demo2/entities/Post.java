@@ -20,6 +20,9 @@ public class Post {
     User user;
     @Lob
     @Column(columnDefinition = "text")
-    String title;
+    String Txt;
+    @Column(name = "title")
+    String Title;
+
 
 }

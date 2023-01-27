@@ -21,8 +21,8 @@ public class UserService implements IuserService {
     }
 
     @Override
-    public Optional<User> getByIdUser(Long id) {
-        return Optional.ofNullable(iUserRepository.findById(id).orElse(null));
+    public User getByIdUser(Long id) {
+        return iUserRepository.findById(id).orElse(null);
     }
 
     @Override
