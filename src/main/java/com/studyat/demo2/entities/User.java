@@ -7,9 +7,9 @@ import jakarta.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    String userName;
-    String password;
+    private long id;
+    private String userName;
+    private String password;
 
     public long getId() {
         return id;

@@ -2,6 +2,7 @@ package com.studyat.demo2.controller;
 
 import com.studyat.demo2.entities.Post;
 import com.studyat.demo2.request.PostCreateRequest;
+import com.studyat.demo2.request.PostUpdateRequest;
 import com.studyat.demo2.service.IPostService;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,10 @@ public class PostController {
     @PostMapping("/delete/{PostId}")
     public void deletePost(@PathVariable(name = "PostId") Long id) {
         iPostService.deletePost(id);
+    }
+    @PutMapping("/{postId}")
+    public Post updateOnePost(@PathVariable Long postId, @RequestBody PostUpdateRequest postUpdateRequest){
+        return iPostService.updateOnePost(postId,postUpdateRequest);
     }
 
 

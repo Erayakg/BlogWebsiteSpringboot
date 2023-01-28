@@ -4,6 +4,7 @@ import com.studyat.demo2.entities.Post;
 import com.studyat.demo2.entities.User;
 import com.studyat.demo2.repository.IPostRepository;
 import com.studyat.demo2.request.PostCreateRequest;
+import com.studyat.demo2.request.PostUpdateRequest;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,23 @@ public class PostService implements IPostService{
     @Override
     public void deletePost(Long id) {
         iPostRepository.deleteById(id);
+    }
+
+    @Override
+    public Post updateOnePost(Long postId, PostUpdateRequest postUpdateRequest) {
+        Optional<Post> post =iPostRepository.findById(postId);
+        if (post.isPresent()){
+            Post toUpdate=post.get();
+            toUpdate.setTxt(postUpdateRequest.getTxt());
+            toUpdate.setTitle(postUpdateRequest.getTitle());
+            iPostRepository.save(toUpdate);
+            return toUpdate;
+        }
+        return null;
+    }
+    @Override
+    public void delete(Long postId) {
+        iPostRepository.deleteById(postId);
     }
 
     @Override
