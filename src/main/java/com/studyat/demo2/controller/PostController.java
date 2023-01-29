@@ -38,9 +38,10 @@ public class PostController {
     public void deletePost(@PathVariable(name = "PostId") Long id) {
         iPostService.deletePost(id);
     }
+
     @PutMapping("/{postId}")
-    public Post updateOnePost(@PathVariable Long postId, @RequestBody PostUpdateRequest postUpdateRequest){
-        return iPostService.updateOnePost(postId,postUpdateRequest);
+    public Post updateOnePost(@PathVariable Long postId, @RequestBody PostUpdateRequest postUpdateRequest) {
+        return iPostService.updateOnePost(postId, postUpdateRequest);
     }
 
 
