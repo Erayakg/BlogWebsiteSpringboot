@@ -2,6 +2,7 @@ package com.studyat.demo2.controller;
 
 import com.studyat.demo2.entities.Like;
 import com.studyat.demo2.service.ILikeService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +16,11 @@ public class LikeController {
     public LikeController(ILikeService iLikeService) {
         this.iLikeService = iLikeService;
     }
-    @RequestMapping
+    @GetMapping
     public List<Like> getLikes(Optional<Long> userId,Optional<Long> PostId){
         return iLikeService.getAllLikesWithParam(PostId,userId);
     }
-    @RequestMapping
+    @GetMapping("/LikeId")
     public List<Like> getLikesByLikeId(Optional<Long> LikeId){
         return iLikeService.getLikeByLikeId(LikeId);
     }
