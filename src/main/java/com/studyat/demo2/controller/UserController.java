@@ -27,7 +27,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public User getByIdUser(@PathVariable(name = "userId") Long id) {
 
-         return iuserService.getByIdUser(id);
+         return iuserService.getByUserId(id);
     }
     @PostMapping("delete/{UserDeleteId}")
     public void deleteById(@PathVariable(name ="UserDeleteId") Long userId){

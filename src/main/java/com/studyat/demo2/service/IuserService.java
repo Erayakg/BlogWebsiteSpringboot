@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IuserService {
     List<User> getAllUser();
-    User getByIdUser(Long id);
+    User getByUserId(Long id);
     void deleteUser(Long id);
     User updateUser(Long id,User user);
     User createUser(User user);

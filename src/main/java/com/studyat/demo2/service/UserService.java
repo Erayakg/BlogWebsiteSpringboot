@@ -21,7 +21,7 @@ public class UserService implements IuserService {
     }
 
     @Override
-    public User getByIdUser(Long id) {
+    public User getByUserId(Long id) {
         return iUserRepository.findById(id).orElse(null);
     }
 

@@ -64,7 +64,7 @@ public class PostService implements IPostService{
 
     @Override
     public Post Save(PostCreateRequest postCreateRequest) {
-    User user= iuserService.getByIdUser(postCreateRequest.getUserId());
+    User user= iuserService.getByUserId(postCreateRequest.getUserId());
     if (user==null){
         return null;
     }

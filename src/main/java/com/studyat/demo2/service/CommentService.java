@@ -46,7 +46,7 @@ public class CommentService implements ICommentService {
     @Override
     public Comment addComment(Long postId, CommentCreateRequest commentCreateRequest) {
 
-        User user = userService.getByIdUser(commentCreateRequest.getUserId());
+        User user = userService.getByUserId(commentCreateRequest.getUserId());
         Post post = postService.getOnePost(commentCreateRequest.getPostId());
 
         if (user != null && post != null) {

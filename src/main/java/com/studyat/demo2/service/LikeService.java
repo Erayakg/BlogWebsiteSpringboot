@@ -42,7 +42,7 @@ public class LikeService implements ILikeService {
 
     @Override
     public Like createLike(LikeCreateRequest likeCreateRequest) {
-        User user = iuserService.getByIdUser(likeCreateRequest.getUserId());
+        User user = iuserService.getByUserId(likeCreateRequest.getUserId());
         Post post =iPostService.getOnePost(likeCreateRequest.getPostId());
         if (user!=null && post!=null){
             Like saveLike=new Like();
