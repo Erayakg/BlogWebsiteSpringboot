@@ -13,8 +13,6 @@ public class UserService implements IuserService {
     public UserService(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
-
-
     @Override
     public List<User> getAllUser() {
         return iUserRepository.findAll();
@@ -24,12 +22,10 @@ public class UserService implements IuserService {
     public User getByUserId(Long id) {
         return iUserRepository.findById(id).orElse(null);
     }
-
     @Override
     public void deleteUser(Long id) {
         iUserRepository.deleteById(id);
     }
-
     @Override
     public User updateUser(Long id,User updateUser) {
         Optional<User> user =iUserRepository.findById(id);

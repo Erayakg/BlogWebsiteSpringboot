@@ -1,12 +1,13 @@
 package com.studyat.demo2.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
 
 @Entity
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String userName;
     private String password;

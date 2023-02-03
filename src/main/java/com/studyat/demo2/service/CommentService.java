@@ -4,6 +4,8 @@ import com.studyat.demo2.entities.Comment;
 import com.studyat.demo2.entities.Post;
 import com.studyat.demo2.entities.User;
 import com.studyat.demo2.repository.ICommentRepository;
+import com.studyat.demo2.repository.IPostRepository;
+import com.studyat.demo2.repository.IUserRepository;
 import com.studyat.demo2.request.CommentCreateRequest;
 import com.studyat.demo2.request.CommentUpdateRequest;
 import org.springframework.stereotype.Service;
@@ -13,12 +15,12 @@ import java.util.Optional;
 @Service
 public class CommentService implements ICommentService {
     private ICommentRepository iCommentRepository;
-    private UserService userService;
-    private PostService postService;
+    private IUserRepository iUserRepository;
+private  PostService postService;
 
-    public CommentService(ICommentRepository iCommentRepository, UserService userService, PostService postService) {
+    public CommentService(ICommentRepository iCommentRepository, IUserRepository iUserRepository, PostService postService) {
         this.iCommentRepository = iCommentRepository;
-        this.userService = userService;
+        this.iUserRepository = iUserRepository;
         this.postService = postService;
     }
 
@@ -46,15 +48,14 @@ public class CommentService implements ICommentService {
     @Override
     public Comment addComment(Long postId, CommentCreateRequest commentCreateRequest) {
 
-        User user = userService.getByUserId(commentCreateRequest.getUserId());
+        User user = iUserRepository.getUserById(commentCreateRequest.getUserId());
         Post post = postService.getOnePost(commentCreateRequest.getPostId());
 
         if (user != null && post != null) {
             Comment commmentToSave = new Comment();
-            commmentToSave.setId(commentCreateRequest.getId());
-            commmentToSave.setPost(commmentToSave.getPost());
-            commmentToSave.setUser(commmentToSave.getUser());
-            commmentToSave.setText(commmentToSave.getText());
+            commmentToSave.setPost(post);
+            commmentToSave.setUser(user);
+            commmentToSave.setText(commentCreateRequest.getTxt());
             return iCommentRepository.save(commmentToSave);
         } else
             return null;

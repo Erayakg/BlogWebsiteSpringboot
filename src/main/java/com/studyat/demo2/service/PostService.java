@@ -3,6 +3,7 @@ package com.studyat.demo2.service;
 import com.studyat.demo2.entities.Post;
 import com.studyat.demo2.entities.User;
 import com.studyat.demo2.repository.IPostRepository;
+import com.studyat.demo2.repository.IUserRepository;
 import com.studyat.demo2.request.PostCreateRequest;
 import com.studyat.demo2.request.PostUpdateRequest;
 import com.studyat.demo2.response.PostResponse;
@@ -16,11 +17,11 @@ import java.util.stream.Collectors;
 @Service
 public class PostService implements IPostService{
     private IPostRepository iPostRepository;
-    private IuserService iuserService;
+    private IUserRepository iUserRepository;
 
-    public PostService(IPostRepository iPostRepository, IuserService iuserService) {
+    public PostService(IPostRepository iPostRepository, IUserRepository iUserRepository) {
         this.iPostRepository = iPostRepository;
-        this.iuserService = iuserService;
+        this.iUserRepository = iUserRepository;
     }
 
     @Override
@@ -64,7 +65,7 @@ public class PostService implements IPostService{
 
     @Override
     public Post Save(PostCreateRequest postCreateRequest) {
-    User user= iuserService.getByUserId(postCreateRequest.getUserId());
+        User user= iUserRepository.getUserById(postCreateRequest.getUserId());
     if (user==null){
         return null;
     }
@@ -72,7 +73,6 @@ public class PostService implements IPostService{
     toSave.setId(postCreateRequest.getId());
     toSave.setTitle(postCreateRequest.getTitle());
     toSave.setTxt(postCreateRequest.getText());
-    toSave.setTitle(postCreateRequest.getTitle());
     toSave.setUser(user);
     return iPostRepository.save(toSave);
 
