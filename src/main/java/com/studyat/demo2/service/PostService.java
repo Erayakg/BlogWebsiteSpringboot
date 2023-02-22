@@ -7,7 +7,6 @@ import com.studyat.demo2.repository.IUserRepository;
 import com.studyat.demo2.request.PostCreateRequest;
 import com.studyat.demo2.request.PostUpdateRequest;
 import com.studyat.demo2.response.PostResponse;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,9 +63,11 @@ public class PostService implements IPostService{
     }
 
     @Override
-    public Post Save(PostCreateRequest postCreateRequest) {
-        User user= iUserRepository.getUserById(postCreateRequest.getUserId());
+    public PostCreateRequest Save(PostCreateRequest postCreateRequest) {
+        System.out.println(postCreateRequest.toString());
+        User user=iUserRepository.getReferenceById(postCreateRequest.getUserId());
     if (user==null){
+        System.out.println("kullanıcı bulunamadı!!!");
         return null;
     }
     Post toSave=new Post();
@@ -74,7 +75,9 @@ public class PostService implements IPostService{
     toSave.setTitle(postCreateRequest.getTitle());
     toSave.setTxt(postCreateRequest.getText());
     toSave.setUser(user);
-    return iPostRepository.save(toSave);
+    iPostRepository.save(toSave);
+    System.out.println(toSave.toString());
+    return  postCreateRequest;
 
     }
 }

@@ -8,15 +8,20 @@ import com.studyat.demo2.repository.IPostRepository;
 import com.studyat.demo2.repository.IUserRepository;
 import com.studyat.demo2.request.CommentCreateRequest;
 import com.studyat.demo2.request.CommentUpdateRequest;
+import com.studyat.demo2.response.CommentResponse;
+import com.studyat.demo2.response.PostResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService implements ICommentService {
     private ICommentRepository iCommentRepository;
     private IUserRepository iUserRepository;
-private  PostService postService;
+    private PostService postService;
 
     public CommentService(ICommentRepository iCommentRepository, IUserRepository iUserRepository, PostService postService) {
         this.iCommentRepository = iCommentRepository;
@@ -25,15 +30,28 @@ private  PostService postService;
     }
 
     @Override
-    public List<Comment> getAllCommentsWithParam(Optional<Long> userId, Optional<Long> postId) {
+    public List<CommentResponse> getAllCommentsWithParam(Optional<Long> userId, Optional<Long> postId) {
+        List<Comment> commentList;
         if (userId.isPresent() && postId.isPresent()) {
-            return iCommentRepository.findByUserIdAndPostId(userId.get(), postId.get());
+            return null;
+            //  return iCommentRepository.findByUserIdAndPostId(userId.get(), postId.get());
         } else if (userId.isPresent()) {
-            return iCommentRepository.findByUserId(userId.get());
+            return null;
+
+            //return iCommentRepository.findByUserId(userId.get());
         } else if (postId.isPresent()) {
-            return iCommentRepository.findByPostId(postId.get());
+            return null;
+            //
+            // return iCommentRepository.findByPostId(postId.get());
         } else
-            return iCommentRepository.findAll();
+
+            commentList = iCommentRepository.findAll();
+        List<CommentResponse> commentResponses =new ArrayList<>();
+        for (Comment c : commentList) {
+            CommentResponse commentResponse = new CommentResponse(c);
+            commentResponses.add(commentResponse);
+        }
+        return commentResponses;
     }
 
     @Override
@@ -41,10 +59,12 @@ private  PostService postService;
         iCommentRepository.deleteById(commentId);
         return null;
     }
+
     @Override
     public List<Comment> getOneCommentById(Long commentId) {
         return iCommentRepository.findCommentById(commentId);
     }
+
     @Override
     public Comment addComment(Long postId, CommentCreateRequest commentCreateRequest) {
 
@@ -55,17 +75,19 @@ private  PostService postService;
             Comment commmentToSave = new Comment();
             commmentToSave.setPost(post);
             commmentToSave.setUser(user);
-            commmentToSave.setText(commentCreateRequest.getTxt());
+            commmentToSave.setCommentTxt(commentCreateRequest.getTxt());
+
             return iCommentRepository.save(commmentToSave);
         } else
             return null;
     }
+
     @Override
     public Comment UpdateComment(Long CommentId, CommentUpdateRequest commentUpdateRequest) {
         Optional<Comment> comment = iCommentRepository.findById(CommentId);
         if (comment.isPresent()) {
             Comment commentToUpdate = comment.get();
-            commentToUpdate.setText(commentToUpdate.getText());
+            commentToUpdate.setCommentTxt(commentToUpdate.getCommentTxt());
             return iCommentRepository.save(commentToUpdate);
 
         } else

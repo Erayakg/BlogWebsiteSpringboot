@@ -5,6 +5,7 @@ import com.studyat.demo2.entities.Post;
 import com.studyat.demo2.repository.ICommentRepository;
 import com.studyat.demo2.request.CommentCreateRequest;
 import com.studyat.demo2.request.CommentUpdateRequest;
+import com.studyat.demo2.response.CommentResponse;
 import com.studyat.demo2.service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,8 @@ public class CommentController {
     }
 
     @GetMapping
-    public List<Comment> getAllComments(@RequestParam Optional<Long> userId,
-                                        @RequestParam Optional<Long> postId) {
+    public List<CommentResponse> getAllComments(@RequestParam  Optional<Long> userId,
+                                                @RequestParam  Optional<Long> postId) {
         return iCommentService.getAllCommentsWithParam(userId,postId);
     }
     @GetMapping("/{commentId}")

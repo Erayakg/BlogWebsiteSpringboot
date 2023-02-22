@@ -1,5 +1,6 @@
 package com.studyat.demo2.request;
 
+import com.studyat.demo2.entities.Post;
 import lombok.Data;
 
 @Data

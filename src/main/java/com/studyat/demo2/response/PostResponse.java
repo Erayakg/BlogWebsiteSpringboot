@@ -12,8 +12,8 @@ public class PostResponse {
     private String title;
     public PostResponse(Post post) {
         this.id = post.getId();
-        UserId = post.getUser().getId();
-        UserName = post.getUser().getUserName();
+        this.UserId = post.getUser().getId();
+        this.UserName = post.getUser().getUserName();
         this.txt = post.getTxt();
         this.title = post.getTitle();
     }

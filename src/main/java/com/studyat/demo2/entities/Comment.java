@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Data
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id",nullable = false)
@@ -24,6 +24,6 @@ public class Comment {
     @JsonIgnore
     private User user;
     @Lob
-    @Column(columnDefinition = "text")
-    private String text;
+    @Column(columnDefinition = "commentTxt")
+    private String commentTxt;
 }

@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface IPostService {
     List<PostResponse> getAllPost(@RequestParam Optional<Long> userId);
     Post getOnePost(Long id);
-    Post Save(PostCreateRequest postCreateRequest);
+    PostCreateRequest Save(PostCreateRequest postCreateRequest);
     void deletePost(Long id);
     Post updateOnePost(Long postId, PostUpdateRequest updateRequest);
 

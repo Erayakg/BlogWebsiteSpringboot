@@ -31,7 +31,7 @@ public class PostController {
     }
 
     @PostMapping
-    public Post createOnePost(@RequestBody PostCreateRequest newPostRequest) {
+    public PostCreateRequest createOnePost(@RequestBody PostCreateRequest newPostRequest) {
         return iPostService.Save(newPostRequest);
     }
 
