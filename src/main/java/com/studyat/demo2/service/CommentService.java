@@ -4,18 +4,15 @@ import com.studyat.demo2.entities.Comment;
 import com.studyat.demo2.entities.Post;
 import com.studyat.demo2.entities.User;
 import com.studyat.demo2.repository.ICommentRepository;
-import com.studyat.demo2.repository.IPostRepository;
 import com.studyat.demo2.repository.IUserRepository;
 import com.studyat.demo2.request.CommentCreateRequest;
 import com.studyat.demo2.request.CommentUpdateRequest;
 import com.studyat.demo2.response.CommentResponse;
-import com.studyat.demo2.response.PostResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentService implements ICommentService {
@@ -76,7 +73,6 @@ public class CommentService implements ICommentService {
             commmentToSave.setPost(post);
             commmentToSave.setUser(user);
             commmentToSave.setCommentTxt(commentCreateRequest.getTxt());
-
             return iCommentRepository.save(commmentToSave);
         } else
             return null;
